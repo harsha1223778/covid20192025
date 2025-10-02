@@ -6,7 +6,6 @@
     <title>COVID-19 Global Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Your existing CSS styles remain exactly the same */
         * {
             margin: 0;
             padding: 0;
@@ -15,10 +14,24 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            color: #fff;
-            min-height: 100vh;
-            padding: 20px;
+           margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      font-weight: bold;
+      background: url('covid199.jpg') repeat-x center center fixed;
+      background-size: cover;
+      animation: slideBackground 60s linear infinite;
+      color: #fff;
+      position: relative;
+        }
+        body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* 0.5 = 50% dark overlay */
+      z-index: -1; /* Push behind the content */
         }
 
         .container {
@@ -36,11 +49,13 @@
             font-size: 2.5rem;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 700; /* Extra bold for main heading */
         }
 
         .subtitle {
             font-size: 1.2rem;
             opacity: 0.9;
+            font-weight: 600;
         }
 
         .dashboard {
@@ -70,6 +85,7 @@
             font-size: 1.5rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             padding-bottom: 10px;
+            font-weight: 700; /* Bold for card headings */
         }
 
         .stats-grid {
@@ -84,6 +100,7 @@
             padding: 15px;
             text-align: center;
             transition: transform 0.3s ease;
+            font-weight: 600; /* Bold text in stat boxes */
         }
 
         .stat-box:hover {
@@ -92,7 +109,7 @@
 
         .stat-value {
             font-size: 1.8rem;
-            font-weight: bold;
+            font-weight: 700; /* Extra bold for numbers */
             margin: 10px 0;
         }
 
@@ -126,10 +143,12 @@
             color: white;
             font-size: 1rem;
             outline: none;
+            font-weight: 600; /* Bold search text */
         }
 
         #countrySearch::placeholder {
             color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
         }
 
         .dropdown {
@@ -157,6 +176,7 @@
             font-size: 0.9rem;
             min-height: 40px;
             align-items: center;
+            font-weight: 600; /* Bold dropdown items */
         }
 
         .dropdown-item:hover {
@@ -165,7 +185,7 @@
 
         .country-cases {
             color: #ff6b6b;
-            font-weight: bold;
+            font-weight: 700; /* Extra bold for case numbers */
             font-size: 0.85rem;
         }
 
@@ -190,6 +210,7 @@
 
         .detail-title {
             font-size: 1.8rem;
+            font-weight: 700; /* Extra bold for country name */
         }
 
         .close-btn {
@@ -198,6 +219,7 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            font-weight: 700;
         }
 
         .detail-stats {
@@ -218,11 +240,12 @@
             padding: 15px;
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.15);
+            font-weight: 600; /* Bold text in detail stats */
         }
 
         .detail-stat-value {
             font-size: 1.5rem;
-            font-weight: bold;
+            font-weight: 700; /* Extra bold for detail numbers */
             margin: 10px 0;
         }
 
@@ -249,6 +272,7 @@
             text-align: center;
             margin-bottom: 15px;
             font-size: 1.2rem;
+            font-weight: 700; /* Bold chart titles */
         }
 
         .chart-container {
@@ -280,6 +304,7 @@
             text-align: center;
             margin-bottom: 15px;
             font-size: 1.2rem;
+            font-weight: 700; /* Bold global chart titles */
         }
 
         .global-chart-container {
@@ -292,6 +317,7 @@
             text-align: center;
             padding: 15px;
             font-size: 1rem;
+            font-weight: 600; /* Bold loading text */
         }
 
         .error {
@@ -299,6 +325,7 @@
             padding: 15px;
             color: #ff6b6b;
             font-size: 1rem;
+            font-weight: 600; /* Bold error text */
         }
 
         footer {
@@ -307,6 +334,7 @@
             padding: 20px;
             font-size: 0.9rem;
             opacity: 0.7;
+            font-weight: 600; /* Bold footer text */
         }
 
         .no-countries-message {
@@ -315,6 +343,7 @@
             font-style: italic;
             opacity: 0.7;
             margin-top: 10px;
+            font-weight: 600; /* Bold message text */
         }
 
         .tabs {
@@ -328,11 +357,13 @@
             cursor: pointer;
             border-bottom: 3px solid transparent;
             transition: all 0.3s ease;
+            font-weight: 600; /* Bold tab text */
         }
 
         .tab.active {
             border-bottom: 3px solid #ff6b6b;
             color: #ff6b6b;
+            font-weight: 700; /* Extra bold for active tab */
         }
 
         .tab-content {
@@ -350,19 +381,22 @@
             opacity: 0.7;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
-            margin-top: 40px; /* Increased margin to move it down */
+            margin-top: 40px;
+            font-weight: 600; /* Bold placeholder text */
         }
 
         .country-placeholder h3 {
             margin-bottom: 15px;
-            font-size: 1.3rem; /* Reduced from 1.5rem */
+            font-size: 1.3rem;
+            font-weight: 700; /* Extra bold for placeholder heading */
         }
 
         .country-placeholder p {
-            font-size: 1rem; /* Reduced from 1.1rem */
+            font-size: 1rem;
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
+            font-weight: 600;
         }
 
         .search-card {
@@ -414,6 +448,7 @@
             padding: 15px;
             color: #666;
             font-style: italic;
+            font-weight: 600; /* Bold no results text */
         }
 
         .data-warning {
@@ -425,6 +460,7 @@
             padding: 8px 12px;
             border-radius: 5px;
             border-left: 3px solid #ffa94d;
+            font-weight: 600; /* Bold warning text */
         }
     </style>
 </head>
